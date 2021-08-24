@@ -332,6 +332,10 @@ export default {
     onSubmit() {
       this.$store.dispatch("setUserInfo", { ...this.user });
 
+      setTimeout(() => {
+        this.$store.dispatch("getUserInfo");
+      }, 1000);
+
       // axios
       //   .post("/users.json", {
       //     name: this.user.name,

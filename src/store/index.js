@@ -6,12 +6,12 @@ export default createStore({
     id: ""
   },
   mutations: {
-    setId(state,id) {
-      state.id=id
+    setId(state, id) {
+      state.id = id
     }
   },
   actions: {
-    setUserInfo({commit}, user) {
+    setUserInfo({ commit }, user) {
       axios.post("/users.json",
         {
           name: user.name,
@@ -31,12 +31,17 @@ export default createStore({
           website: user.website,
         }).then(response => {
           console.log(response);
-          commit("setId",response.data.name)
+          commit("setId", response.data.name)
         }).catch(error => {
           console.log(error);
         })
     },
-    getUserInfo() {
+    getUserInfo(state) {
+      axios.get("/users/" + state.rootState.id + ".json").then(response => {
+        console.log(response);
+      }).catch(error => {
+        console.log(error);
+      })
     }
   },
   getters: {
