@@ -264,6 +264,7 @@
 </template>
 
 <script>
+//import axios from "../axios";
 export default {
   data() {
     return {
@@ -327,11 +328,34 @@ export default {
     changeBirthdate() {
       this.user.birthdate =
         this.date.day + "." + this.date.month + "." + this.date.year;
-      console.log(this.user.birthdate);
-      console.log(this.user.email);
     },
     onSubmit() {
       this.$store.dispatch("setUserInfo", { ...this.user });
+
+      // axios
+      //   .post("/users.json", {
+      //     name: this.user.name,
+      //     surname: this.user.surname,
+      //     email: this.user.email,
+      //     phoneNumber: this.user.phoneNumber,
+      //     address: this.user.address,
+      //     postCode: this.user.postCode,
+      //     city: this.user.city,
+      //     birthdate: this.user.birthdate,
+      //     birthPlace: this.user.birthPlace,
+      //     drivingLicense: this.user.drivingLicense,
+      //     gender: this.user.gender,
+      //     militaryState: this.user.militaryState,
+      //     maritalStatus: this.user.maritalStatus,
+      //     linkedin: this.user.linkedin,
+      //     website: this.user.website,
+      //   })
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //   console.log(error);
+      // });
     },
   },
 };

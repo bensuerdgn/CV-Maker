@@ -3,34 +3,38 @@ import axios from '../axios'
 
 export default createStore({
   state: {
-
+    id: ""
   },
   mutations: {
+    setId(state,id) {
+      state.id=id
+    }
   },
   actions: {
-    setUserInfo(payload) {
-      axios.post("/users.json", 
-      {
-        name: payload.name,
-        surname: payload.surname,
-        email: payload.email,
-        phoneNumber: payload.phoneNumber,
-        address: payload.address,
-        postCode: payload.postCode,
-        city: payload.city,
-        birthdate: payload.birthdate,
-        birthPlace: payload.birthPlace,
-        drivingLicense: payload.drivingLicense,
-        gender: payload.gender,
-        militaryState: payload.militaryState,
-        maritalStatus: payload.maritalStatus,
-        linkedin: payload.linkedin,
-        website: payload.website,
-      }).then(response => {
-        console.log(response);
-      }).catch(error => {
-        console.log(error);
-      })
+    setUserInfo({commit}, user) {
+      axios.post("/users.json",
+        {
+          name: user.name,
+          surname: user.surname,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          address: user.address,
+          postCode: user.postCode,
+          city: user.city,
+          birthdate: user.birthdate,
+          birthPlace: user.birthPlace,
+          drivingLicense: user.drivingLicense,
+          gender: user.gender,
+          militaryState: user.militaryState,
+          maritalStatus: user.maritalStatus,
+          linkedin: user.linkedin,
+          website: user.website,
+        }).then(response => {
+          console.log(response);
+          commit("setId",response.data.name)
+        }).catch(error => {
+          console.log(error);
+        })
     },
     getUserInfo() {
     }
