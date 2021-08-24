@@ -1,11 +1,11 @@
 <template>
   <div class="my-0 mx-auto w-full max-w-4xl relative -mt-24">
-    <div class="shadow-2xl bg-white p-10 mb-20">
-      <div class="title text-lg font-bold text-gray-700">
-        <h2 class="pb-5">Kişisel bilgiler</h2>
-        <hr />
-      </div>
-      <form @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit">
+      <div class="shadow-2xl bg-white p-10 mb-20">
+        <div class="title text-lg font-bold text-gray-700">
+          <h2 class="pb-5">Kişisel bilgiler</h2>
+          <hr />
+        </div>
         <div class="form w-full">
           <div class="form-group flex my-5 w-full">
             <div
@@ -88,7 +88,7 @@
               <input
                 type="text"
                 class="w-full h-12 px-3 border rounded"
-                v-model="user.phone"
+                v-model="user.phoneNumber"
               />
             </div>
           </div>
@@ -188,7 +188,11 @@
                 id=""
                 class="w-full h-12 px-3 border rounded"
                 v-model="user.drivingLicense"
-              ></select>
+              >
+                <option value="a">A</option>
+                <option value="b">B</option>
+                <option value="c">C</option>
+              </select>
             </div>
             <div class="gender w-full">
               <label for="gender">Cinsiyet</label>
@@ -197,7 +201,11 @@
                 id=""
                 class="w-full h-12 px-3 border rounded"
                 v-model="user.gender"
-              ></select>
+              >
+                <option value="female">Kadın</option>
+                <option value="male">Erkek</option>
+                <option value="other">Diğer</option>
+              </select>
             </div>
           </div>
           <div class="form-group flex my-5 w-full">
@@ -208,7 +216,10 @@
                 id=""
                 class="w-full h-12 px-3 border rounded"
                 v-model="user.militaryState"
-              ></select>
+              >
+                <option value="yes">Yaptı</option>
+                <option value="no">Yapılmadı</option>
+              </select>
             </div>
             <div class="marital-status w-full">
               <label for="maritalStatus">Medeni durumu</label>
@@ -217,7 +228,10 @@
                 id=""
                 class="w-full h-12 px-3 border rounded"
                 v-model="user.maritalStatus"
-              ></select>
+              >
+                <option value="married">Evli</option>
+                <option value="single">Bekar</option>
+              </select>
             </div>
           </div>
           <div class="form-group flex my-5 w-full">
@@ -239,13 +253,13 @@
             </div>
           </div>
         </div>
-        <div class="button text-center pb-20">
-          <button class="h-12 bg-blue-300 px-5 rounded text-white">
-            Sonraki adım
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="button text-center pb-20">
+        <button class="h-12 bg-blue-300 px-5 rounded text-white">
+          Sonraki adım
+        </button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -266,7 +280,7 @@ export default {
         city: "",
         birthdate: "",
         birthPlace: "",
-        drivingLicence: "",
+        drivingLicense: "",
         gender: "",
         militaryState: "",
         maritalStatus: "",
