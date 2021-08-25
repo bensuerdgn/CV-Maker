@@ -1,7 +1,7 @@
 <template>
   <div class="header bg-blue-400 h-80">
     <div class="flex flex-col items-center justify-center pt-20 pb-8">
-      <h1 class="text-4xl text-white pb-8 font-bold">Kişisel Bilgiler</h1>
+      <h1 class="text-4xl text-white pb-8 font-bold">CV-Maker</h1>
       <div class="progress-bar flex justify-center items-center">
         <div
           class="
