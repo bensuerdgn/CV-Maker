@@ -1,5 +1,5 @@
 <template>
-  <div class="my-0 mx-auto w-full max-w-4xl relative -mt-24">
+  <div class="my-0 mx-auto w-full max-w-4xl relative -mt-20">
     <form @submit.prevent="onSubmit">
       <div class="shadow-2xl bg-white p-10 mb-20">
         <div class="title text-lg font-bold text-gray-700">
@@ -255,7 +255,7 @@
         </div>
       </div>
       <div class="button text-center pb-20">
-        <button class="h-12 bg-blue-300 px-5 rounded text-white">
+        <button class="h-12 bg-yellow-400 px-5 rounded text-white">
           Sonraki adım
         </button>
       </div>
@@ -272,6 +272,7 @@ export default {
       preview: null,
       image: false,
       user: {
+        photo: "",
         name: "",
         surname: "",
         email: "",
@@ -321,6 +322,7 @@ export default {
         this.image = true;
         this.preview = URL.createObjectURL(this.photoFile);
         console.log(this.preview);
+        this.user.photo = this.preview;
       } else {
         this.image = false;
       }
@@ -331,11 +333,6 @@ export default {
     },
     onSubmit() {
       this.$store.dispatch("setUserInfo", { ...this.user });
-
-      setTimeout(() => {
-        this.$store.dispatch("getUserInfo");
-      }, 1000);
-
       // axios
       //   .post("/users.json", {
       //     name: this.user.name,
