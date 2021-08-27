@@ -61,16 +61,24 @@
                 <input
                   type="text"
                   class="w-full h-12 px-3 border rounded"
-                  v-model="user.name"
+                  v-model="v$.user.name.$model"
                 />
+                <small v-if="v$.user.name.$error" class="form-text text-danger"
+                  >Bu alan zorunludur</small
+                >
               </div>
               <div class="surname flex flex-col mt-3 w-full">
                 <label for="surname">Soy isim*</label>
                 <input
                   type="text"
                   class="w-full h-12 px-3 border rounded"
-                  v-model="user.surname"
+                  v-model="v$.user.surname.$model"
                 />
+                <small
+                  v-if="v$.user.surname.$error"
+                  class="form-text text-danger"
+                  >Bu alan zorunludur</small
+                >
               </div>
             </div>
           </div>
@@ -80,16 +88,32 @@
               <input
                 type="text"
                 class="w-full h-12 px-3 border rounded"
-                v-model="user.email"
+                v-model="v$.user.email.$model"
               />
+              <small
+                v-if="v$.user.email.$errors.$message == 'Value is required'"
+                class="form-text text-danger"
+                >Bu alan zorunludur</small
+              >
+              <small
+                v-if="
+                  v$.user.email.$error.$message ==
+                  'Value is not a valid email address'
+                "
+                class="form-text text-danger"
+                >Geçerli bir email adresi giriniz</small
+              >
             </div>
             <div class="phone flex flex-col mt-3 w-full">
               <label for="phone">Telefon numarası</label>
               <input
                 type="text"
                 class="w-full h-12 px-3 border rounded"
-                v-model="user.phoneNumber"
+                v-model="v$.user.phoneNumber.$model"
               />
+              <small v-if="v$.user.phoneNumber.$error" class="form-text text-danger"
+                  >Sadece rakam giriniz</small
+                >
             </div>
           </div>
           <div class="form-group flex my-5 w-full">
@@ -108,8 +132,11 @@
               <input
                 type="text"
                 class="w-full h-12 px-3 border rounded"
-                v-model="user.postCode"
+                v-model="v$.user.postCode.$model"
               />
+              <small v-if="v$.user.postCode.$error" class="form-text text-danger"
+                  >Sadece rakam giriniz</small
+                >
             </div>
             <div class="city w-full">
               <label for="city">Şehir</label>
@@ -254,8 +281,12 @@
           </div>
         </div>
       </div>
+
       <div class="button text-center pb-20">
-        <button class="h-12 bg-yellow-400 px-5 rounded text-white">
+        <button
+          class="h-12 bg-yellow-400 px-5 rounded text-white"
+          :disabled="v$.$invalid"
+        >
           Sonraki adım
         </button>
       </div>
@@ -264,8 +295,12 @@
 </template>
 
 <script>
-//import axios from "../axios";
+import useVuelidate from "@vuelidate/core";
+import { required, email, numeric } from "@vuelidate/validators";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       photoFile: null,
@@ -273,9 +308,9 @@ export default {
       image: false,
       user: {
         photo: "",
-        name: "",
-        surname: "",
-        email: "",
+        name: " ",
+        surname: " ",
+        email: " ",
         phoneNumber: "",
         address: "",
         postCode: "",
@@ -358,6 +393,17 @@ export default {
       //   console.log(error);
       // });
     },
+  },
+  validations() {
+    return {
+      user: {
+        name: { required },
+        surname: { required },
+        email: { required, email },
+        phoneNumber: { numeric },
+        postCode: { numeric },
+      },
+    };
   },
 };
 </script>
