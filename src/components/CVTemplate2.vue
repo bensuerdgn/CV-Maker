@@ -1,23 +1,23 @@
 <template>
-  <div class="">
+  <div class="p-5 bg-green-100" id="cv2">
     <div class="header flex items-center">
       <img
         v-if="user.photo"
-        class="w-8 h-8 rounded-full border mr-2 mb-2"
+        class="w-10 h-10 rounded-full border mr-2 mb-2"
         :src="user.photo"
         alt=""
       />
       <img
         v-if="!user.photo"
-        class="w-8 h-8 rounded-full border mr-2 mb-2"
+        class="w-10 h-10 rounded-full border mr-2 mb-2"
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Crystal_Clear_kdm_user_female.svg/1200px-Crystal_Clear_kdm_user_female.svg.png"
         alt=""
       />
-      <h1 class="font-bold text-base mb-2">Özgeçmiş</h1>
+      <h1 class="font-bold text-2xl mb-2">Özgeçmiş</h1>
     </div>
     <div class="personal border-b border-t py-1">
-      <h2 class="font-semibold text-sm text-gray-600">Kişisel</h2>
-      <ul class="text-xs" v-if="user">
+      <h2 class="font-semibold text-xl text-gray-600">Kişisel</h2>
+      <ul class="text-base pl-20 pt-2" v-if="user">
         <li class="">
           <span class="text-gray-700">İsim : </span>
           <span> {{ user.name }}{{ user.surname }}</span>

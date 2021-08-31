@@ -63,7 +63,7 @@
                   class="w-full h-12 px-3 border rounded"
                   v-model="v$.user.name.$model"
                 />
-                <small v-if="v$.user.name.$error" class="form-text text-danger"
+                <small v-if="v$.user.name.$error" class="form-text text-red-500"
                   >Bu alan zorunludur</small
                 >
               </div>
@@ -76,7 +76,7 @@
                 />
                 <small
                   v-if="v$.user.surname.$error"
-                  class="form-text text-danger"
+                  class="form-text text-red-500"
                   >Bu alan zorunludur</small
                 >
               </div>
@@ -91,16 +91,13 @@
                 v-model="v$.user.email.$model"
               />
               <small
-                v-if="v$.user.email.$errors.$message == 'Value is required'"
-                class="form-text text-danger"
+                v-if="v$.user.email.required.$invalid == true"
+                class="form-text text-red-500"
                 >Bu alan zorunludur</small
               >
               <small
-                v-if="
-                  v$.user.email.$error.$message ==
-                  'Value is not a valid email address'
-                "
-                class="form-text text-danger"
+                v-if="v$.user.email.$invalid"
+                class="form-text text-red-500"
                 >Geçerli bir email adresi giriniz</small
               >
             </div>
@@ -111,9 +108,11 @@
                 class="w-full h-12 px-3 border rounded"
                 v-model="v$.user.phoneNumber.$model"
               />
-              <small v-if="v$.user.phoneNumber.$error" class="form-text text-danger"
-                  >Sadece rakam giriniz</small
-                >
+              <small
+                v-if="v$.user.phoneNumber.$error"
+                class="form-text text-red-500"
+                >Sadece rakam giriniz</small
+              >
             </div>
           </div>
           <div class="form-group flex my-5 w-full">
@@ -134,9 +133,11 @@
                 class="w-full h-12 px-3 border rounded"
                 v-model="v$.user.postCode.$model"
               />
-              <small v-if="v$.user.postCode.$error" class="form-text text-danger"
-                  >Sadece rakam giriniz</small
-                >
+              <small
+                v-if="v$.user.postCode.$error"
+                class="form-text text-red-500"
+                >Sadece rakam giriniz</small
+              >
             </div>
             <div class="city w-full">
               <label for="city">Şehir</label>
@@ -231,7 +232,6 @@
               >
                 <option value="female">Kadın</option>
                 <option value="male">Erkek</option>
-                <option value="other">Diğer</option>
               </select>
             </div>
           </div>
