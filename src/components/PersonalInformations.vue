@@ -59,9 +59,14 @@
               <div class="name flex flex-col w-full">
                 <label for="name">İsim*</label>
                 <input
+                  @blur="v$.user.name.$touch()"
                   type="text"
                   class="w-full h-12 px-3 border rounded"
                   v-model="v$.user.name.$model"
+                  :class="{
+                    'border-2 border-red-500 focus:ring-1 focus:ring-red-500':
+                      v$.user.name.$error,
+                  }"
                 />
                 <small v-if="v$.user.name.$error" class="form-text text-red-500"
                   >Bu alan zorunludur</small
@@ -73,6 +78,10 @@
                   type="text"
                   class="w-full h-12 px-3 border rounded"
                   v-model="v$.user.surname.$model"
+                  :class="{
+                    'border-2 border-red-500 focus:ring-1 focus:ring-red-500':
+                      v$.user.surname.$error,
+                  }"
                 />
                 <small
                   v-if="v$.user.surname.$error"
@@ -89,6 +98,11 @@
                 type="text"
                 class="w-full h-12 px-3 border rounded"
                 v-model="v$.user.email.$model"
+                @click="user.email = ''"
+                :class="{
+                  'border-2 border-red-500 focus:ring-1 focus:ring-red-500':
+                    v$.user.email.$error,
+                }"
               />
               <small
                 v-if="v$.user.email.required.$invalid == true"
@@ -107,6 +121,10 @@
                 type="text"
                 class="w-full h-12 px-3 border rounded"
                 v-model="v$.user.phoneNumber.$model"
+                :class="{
+                  'border-2 border-red-500 focus:ring-1 focus:ring-red-500':
+                    v$.user.phoneNumber.$error,
+                }"
               />
               <small
                 v-if="v$.user.phoneNumber.$error"
@@ -132,6 +150,10 @@
                 type="text"
                 class="w-full h-12 px-3 border rounded"
                 v-model="v$.user.postCode.$model"
+                :class="{
+                  'border-2 border-red-500 focus:ring-1 focus:ring-red-500':
+                    v$.user.postCode.$error,
+                }"
               />
               <small
                 v-if="v$.user.postCode.$error"
@@ -310,7 +332,7 @@ export default {
         photo: "",
         name: " ",
         surname: " ",
-        email: " ",
+        email: "email@email.com",
         phoneNumber: "",
         address: "",
         postCode: "",
@@ -409,6 +431,9 @@ export default {
 </script>
 
 <style>
+input:focus {
+  outline: none;
+}
 .form-group .items {
   width: calc(100% - 156px);
 }

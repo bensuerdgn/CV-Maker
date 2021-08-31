@@ -3,7 +3,11 @@
     <Header class="header" />
     <div class="relative z-10 flex flex-wrap justify-center p-10 -mt-28">
       <div
-        @click="select()"
+        @click="
+          select = !select;
+          isSelected = '#cv';
+        "
+        :class="{ ' outline-blue': select }"
         class="
           flex flex-col
           m-4
@@ -19,71 +23,11 @@
         <CVTemplate class="rounded shadow-lg p-2 mt-1 border border-gray-50" />
       </div>
       <div
-        @click="select()"
-        class="
-          flex flex-col
-          m-4
-          bg-white
-          items-center
-          shadow-xl
-          px-6
-          py-3
-          rounded
+        @click="
+          select2 = !select2;
+          isSelected = '#cv2';
         "
-      >
-        <h2>CV</h2>
-        <CVTemplate2 class="rounded shadow-lg p-2 mt-1 border border-gray-50" />
-      </div>
-      <div
-        @click="select()"
-        class="
-          flex flex-col
-          m-4
-          bg-white
-          items-center
-          shadow-xl
-          px-6
-          py-3
-          rounded
-        "
-      >
-        <h2>CV</h2>
-        <CVTemplate class="rounded shadow-lg p-2 mt-1 border border-gray-50" />
-      </div>
-      <div
-        @click="select()"
-        class="
-          flex flex-col
-          m-4
-          bg-white
-          items-center
-          shadow-xl
-          px-6
-          py-3
-          rounded
-        "
-      >
-        <h2>CV</h2>
-        <CVTemplate2 class="rounded shadow-lg p-2 mt-1 border border-gray-50" />
-      </div>
-      <div
-        @click="select()"
-        class="
-          flex flex-col
-          m-4
-          bg-white
-          items-center
-          shadow-xl
-          px-6
-          py-3
-          rounded
-        "
-      >
-        <h2>CV</h2>
-        <CVTemplate class="rounded shadow-lg p-2 mt-1 border border-gray-50" />
-      </div>
-      <div
-        @click="select()"
+        :class="{ ' outline-blue': select2 }"
         class="
           flex flex-col
           m-4
@@ -123,17 +67,19 @@ export default {
     CVTemplate2,
     Header,
   },
+  data() {
+    return {
+      select: false,
+      select2: false,
+      isSelected: "",
+    };
+  },
   methods: {
-    select() {
-      this.addBorder();
-    },
-    addBorder() {
-      return "border-blue-500 border-2";
-    },
     makePDF() {
+      
       window.html2canvas = html2canvas;
       var doc = new jspdf("p", "pt", "a4");
-      doc.html(document.querySelector("#cv"), {
+      doc.html(document.querySelector(this.isSelected), {
         callback: function (pdf) {
           pdf.save("cv.pdf");
         },

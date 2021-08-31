@@ -17,7 +17,7 @@
     </div>
     <div class="personal border-b border-t py-1">
       <h2 class="font-semibold text-xl text-gray-600">Kişisel</h2>
-      <ul class="text-base pl-20 pt-2" v-if="user">
+      <ul class="text-base pt-2" v-if="user">
         <li class="">
           <span class="text-gray-700">İsim : </span>
           <span> {{ user.name }}{{ user.surname }}</span>
