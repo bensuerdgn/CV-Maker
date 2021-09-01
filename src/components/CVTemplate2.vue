@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 bg-green-100" id="cv2">
+  <div class="p-5 m-0 cv2 bg-green-100" id="cv2">
     <div class="header flex items-center">
       <img
         v-if="user.photo"

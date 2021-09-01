@@ -69,8 +69,7 @@
                   }"
                 />
                 <small v-if="v$.user.name.$error" class="form-text text-red-500"
-                  >Bu alan zorunludur</small
-                >
+                  >Bu alan zorunludur</small>
               </div>
               <div class="surname flex flex-col mt-3 w-full">
                 <label for="surname">Soy isim*</label>
@@ -86,8 +85,7 @@
                 <small
                   v-if="v$.user.surname.$error"
                   class="form-text text-red-500"
-                  >Bu alan zorunludur</small
-                >
+                  >Bu alan zorunludur</small>
               </div>
             </div>
           </div>
@@ -107,13 +105,11 @@
               <small
                 v-if="v$.user.email.required.$invalid == true"
                 class="form-text text-red-500"
-                >Bu alan zorunludur</small
-              >
+                >Bu alan zorunludur</small>
               <small
                 v-if="v$.user.email.$invalid"
                 class="form-text text-red-500"
-                >Geçerli bir email adresi giriniz</small
-              >
+                >Geçerli bir email adresi giriniz</small>
             </div>
             <div class="phone flex flex-col mt-3 w-full">
               <label for="phone">Telefon numarası</label>
@@ -129,8 +125,7 @@
               <small
                 v-if="v$.user.phoneNumber.$error"
                 class="form-text text-red-500"
-                >Sadece rakam giriniz</small
-              >
+                >Sadece rakam giriniz</small>
             </div>
           </div>
           <div class="form-group flex my-5 w-full">
@@ -158,8 +153,7 @@
               <small
                 v-if="v$.user.postCode.$error"
                 class="form-text text-red-500"
-                >Sadece rakam giriniz</small
-              >
+                >Sadece rakam giriniz</small>
             </div>
             <div class="city w-full">
               <label for="city">Şehir</label>
@@ -197,11 +191,11 @@
                   @change="changeBirthdate()"
                 >
                   <option
-                    :value="month"
+                    :value="month.value"
                     v-for="(month, index) in months"
                     :key="index"
                   >
-                    {{ month }}
+                    {{ month.month }}
                   </option>
                 </select>
                 <select
@@ -239,9 +233,9 @@
                 class="w-full h-12 px-3 border rounded"
                 v-model="user.drivingLicense"
               >
-                <option value="a">A</option>
-                <option value="b">B</option>
-                <option value="c">C</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
               </select>
             </div>
             <div class="gender w-full">
@@ -252,8 +246,8 @@
                 class="w-full h-12 px-3 border rounded"
                 v-model="user.gender"
               >
-                <option value="female">Kadın</option>
-                <option value="male">Erkek</option>
+                <option value="Kadın">Kadın</option>
+                <option value="Erkek">Erkek</option>
               </select>
             </div>
           </div>
@@ -266,8 +260,8 @@
                 class="w-full h-12 px-3 border rounded"
                 v-model="user.militaryState"
               >
-                <option value="yes">Yaptı</option>
-                <option value="no">Yapılmadı</option>
+                <option value="Yapıldı">Yapıldı</option>
+                <option value="Yapılmadı">Yapılmadı</option>
               </select>
             </div>
             <div class="marital-status w-full">
@@ -278,8 +272,8 @@
                 class="w-full h-12 px-3 border rounded"
                 v-model="user.maritalStatus"
               >
-                <option value="married">Evli</option>
-                <option value="single">Bekar</option>
+                <option value="Evli">Evli</option>
+                <option value="Bekar">Bekar</option>
               </select>
             </div>
           </div>
@@ -352,20 +346,20 @@ export default {
         year: "",
       },
       months: [
-        "Ocak",
-        "Şubat",
-        "Mart",
-        "Nisan",
-        "Mayıs",
-        "Haziran",
-        "Temmuz",
-        "Ağustos",
-        "Eylül",
-        "Ekim",
-        "Kasım",
-        "Aralık",
+        { value: "01", month: "Ocak" },
+        { value: "02", month: "Şubat" },
+        { value: "03", month: "Mart" },
+        { value: "04", month: "Nisan" },
+        { value: "05", month: "Mayıs" },
+        { value: "06", month: "Haziran" },
+        { value: "07", month: "Temmuz" },
+        { value: "08", month: "Ağustos" },
+        { value: "09", month: "Eylül" },
+        { value: "10", month: "Ekim" },
+        { value: "11", month: "Kasım" },
+        { value: "12", month: "Aralık" },
       ],
-      days: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+      days: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
       years: ["2021", "2020", "2019", "2018", "2017", "2016", "2015"],
     };
   },

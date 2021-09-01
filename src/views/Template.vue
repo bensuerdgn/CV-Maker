@@ -20,14 +20,16 @@
         "
       >
         <h2>CV</h2>
-        <CVTemplate class="rounded shadow-lg p-2 mt-1 border border-gray-50" />
+        <CVTemplate
+          class="template rounded shadow-lg p-2 border border-gray-50"
+        />
       </div>
       <div
         @click="
-          select2 = !select2;
+          select = !select;
           isSelected = '#cv2';
         "
-        :class="{ ' outline-blue': select2 }"
+        :class="{ ' outline-blue': !select }"
         class="
           flex flex-col
           m-4
@@ -40,7 +42,7 @@
         "
       >
         <h2>CV</h2>
-        <CVTemplate2 class="rounded shadow-lg p-2 mt-1 border border-gray-50" />
+        <CVTemplate2 class="template rounded shadow-lg p-2 border border-gray-50" />
       </div>
     </div>
     <div class="button text-center">
@@ -55,8 +57,10 @@
 </template>
 
 <script>
-import html2canvas from "html2canvas";
-import jspdf from "jspdf";
+import print from "print-js";
+
+// import html2canvas from "html2canvas";
+// import jspdf from "jspdf";
 import CVTemplate from "../components/CVTemplate";
 import CVTemplate2 from "../components/CVTemplate2";
 
@@ -76,13 +80,25 @@ export default {
   },
   methods: {
     makePDF() {
-      
-      window.html2canvas = html2canvas;
-      var doc = new jspdf("p", "pt", "a4");
-      doc.html(document.querySelector(this.isSelected), {
-        callback: function (pdf) {
-          pdf.save("cv.pdf");
-        },
+      // window.html2canvas = html2canvas;
+      // var doc = new jspdf("p", "pt", "a4");
+      // doc.setFont("times");
+      // doc.html(document.querySelector(this.isSelected), {
+      //   callback: function (pdf) {
+      //     pdf.save("cv.pdf");
+      //   },
+      // });
+
+      print({
+        printable: document.querySelector(this.isSelected),
+        type: "html",
+        showModal: true,
+        modalMessage: "pdf indiriliyor",
+        scanStyles: true,
+        targetStyles: ["*"],
+        style:
+          ".template{box-shadow:none !important; border: 1px solid red !important; width:100% !important } @media print { body { margin: 0 !important; padding: 0 !important; border: 0 !important; outline: 0 !important;} @page {  margin:0 !important; padding:0 !important; } }",
+        documentTitle: "cv örneği",
       });
     },
   },
