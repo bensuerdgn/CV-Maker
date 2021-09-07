@@ -14,6 +14,7 @@
     "autoprefixer": "^9",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "daisyui": "^1.14.0",
     "firebase": "^8.9.1",
     "postcss": "^7",
     "print-js": "^1.6.0",

@@ -1,57 +1,50 @@
 <template>
   <div class="bg-gray-50">
-    <Header class="header" />
-    <div class="relative z-10 flex flex-wrap justify-center p-10 -mt-28">
-      <div
-        @click="
-          select = !select;
-          isSelected = '#cv';
-        "
-        :class="{ ' outline-blue': select }"
-        class="
-          flex flex-col
-          m-4
-          bg-white
-          items-center
-          shadow-xl
-          px-6
-          py-3
-          rounded
-        "
-      >
-        <h2>CV</h2>
-        <CVTemplate
-          class="template rounded shadow-lg p-2 border border-gray-50"
-        />
-      </div>
-      <div
-        @click="
-          select = !select;
-          isSelected = '#cv2';
-        "
-        :class="{ ' outline-blue': !select }"
-        class="
-          flex flex-col
-          m-4
-          bg-white
-          items-center
-          shadow-xl
-          px-6
-          py-3
-          rounded
-        "
-      >
-        <h2>CV</h2>
-        <CVTemplate2 class="template rounded shadow-lg p-2 border border-gray-50" />
+    <div class="">
+      <Header class="header" />
+      <div class="images mx-20 -mt-10 relative z-10">
+        <div
+          class="image w-52"
+          @click="
+            isSelected = '#frontend';
+            select = !select;
+            template = 'app-FrontendTemplate';
+          "
+          :class="{ ' outline-blue': select }"
+        >
+          <img src="../assets/images/frontend.png" alt="" class="" />
+        </div>
       </div>
     </div>
-    <div class="button text-center">
-      <button
-        class="h-12 mb-10 bg-yellow-400 px-5 rounded text-white"
-        @click="makePDF"
-      >
-        CV indir
-      </button>
+
+    <div class="" v-if="isSelected">
+      <div class="previewTemplate shadow-2xl rounded">
+        <CVPreviewTemplate :template="template" />
+        <div
+          class="
+            button
+            flex
+            justify-between
+            px-10
+            text-center
+            bg-black
+            opacity-40
+          "
+        >
+          <button
+            class="h-12 my-3 bg-yellow-400 opacity-100 px-5 rounded text-black"
+            @click="closeModal"
+          >
+            Close
+          </button>
+          <button
+            class="h-12 my-3 bg-yellow-400 opacity-100 px-5 rounded text-black"
+            @click="makePDF"
+          >
+            Make CV
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -61,21 +54,21 @@ import print from "print-js";
 
 // import html2canvas from "html2canvas";
 // import jspdf from "jspdf";
-import CVTemplate from "../components/CVTemplate";
-import CVTemplate2 from "../components/CVTemplate2";
 
 import Header from "../components/Header";
+import CVPreviewTemplate from "../components/CVPreviewTemplate";
+
 export default {
   components: {
-    CVTemplate,
-    CVTemplate2,
     Header,
+    CVPreviewTemplate,
   },
   data() {
     return {
       select: false,
       select2: false,
       isSelected: "",
+      template: "",
     };
   },
   methods: {
@@ -88,25 +81,57 @@ export default {
       //     pdf.save("cv.pdf");
       //   },
       // });
-
+      var a = document.querySelector(this.isSelected);
+      a = a.clientWidth;
       print({
         printable: document.querySelector(this.isSelected),
         type: "html",
-        showModal: true,
-        modalMessage: "pdf indiriliyor",
-        scanStyles: true,
-        targetStyles: ["*"],
         style:
-          ".template{box-shadow:none !important; border: 1px solid red !important; width:100% !important } @media print { body { margin: 0 !important; padding: 0 !important; border: 0 !important; outline: 0 !important;} @page {  margin:0 !important; padding:0 !important; } }",
-        documentTitle: "cv örneği",
+          "@media print { body { margin: 0 !important; padding: 0 !important; border: 0 !important; outline: 0 !important;} @page {  margin:0 !important; padding:0 !important; } }",
+        targetStyles: ["*"],
+        css: require("@/assets/css/main.css"),
+        maxWidth: a,
       });
+    },
+    closeModal() {
+      this.isSelected = "";
     },
   },
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 .header {
   clip-path: ellipse(100% 100% at 50% 0%);
+}
+.previewTemplate {
+  position: fixed;
+  top: 20%;
+  right: 20%;
+  width: 880px;
+  z-index: 20;
+  background: white;
+  height: 500px;
+  overflow-y: auto;
+}
+.button {
+  position: fixed;
+  z-index: 2;
+  bottom: 35px;
+  width: 880px;
+  button {
+    opacity: 1;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .previewTemplate {
+    top: 15%;
+    right: 10%;
+    width: 600px;
+  }
+  .button {
+    width: 600px;
+    bottom: 75px;
+  }
 }
 </style>
