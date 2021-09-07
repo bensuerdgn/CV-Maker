@@ -1,3 +1,5 @@
 .frontend, .graphic {
   -webkit-print-color-adjust: exact !important;
+  -webkit-print-image-adjust: exact !important;
+
 }

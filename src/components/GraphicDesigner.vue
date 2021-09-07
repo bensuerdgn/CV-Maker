@@ -114,7 +114,7 @@
           </div>
         </div>
       </div>
-      <div class="workExperience my-10 p-10 shadow-box">
+      <div class="workExperience my-10 p-10 mb-0  shadow-box">
         <div class="">
           <div class="experience pl-8">
             <h2 class="text-xl font-bold">

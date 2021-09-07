@@ -1,5 +1,5 @@
 <template>
-  <div class="text-gray-600 px-10 frontend" id="frontend">
+  <div class="text-gray-600 p-10 frontend" id="frontend">
     <div class="header">
       <div class="top flex pt-14">
         <div class="image border-8 border-white ml-5 mr-20 -mb-10 shadow">
