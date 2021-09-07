@@ -57,7 +57,7 @@
     <div class="section">
       <div class="skills py-10 border-b">
         <h1 class="text-2xl font-bold mb-5">Professional Skills</h1>
-        <div class="progress-bars flex justify-between">
+        <div class="progress-bars flex justify-between items-end">
           <div class="">
             <div class="space-y-2 artboard w-32 md:w-64 lg:w-96">
               <span>HTML</span>

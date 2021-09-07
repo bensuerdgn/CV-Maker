@@ -2,17 +2,26 @@
   <div class="bg-gray-50">
     <div class="">
       <Header class="header" />
-      <div class="images mx-20 -mt-10 relative z-10">
+      <div class="images mx-20 -mt-10 relative z-10 flex justify-center">
         <div
-          class="image w-52"
+          class="image w-60 mx-5"
           @click="
             isSelected = '#frontend';
             select = !select;
             template = 'app-FrontendTemplate';
           "
-          :class="{ ' outline-blue': select }"
         >
-          <img src="../assets/images/frontend.png" alt="" class="" />
+          <img src="../assets/images/FrontendTemplate.png" alt="" class="" />
+        </div>
+        <div
+          class="image w-60 mx-5"
+          @click="
+            isSelected = '#graphic';
+            select = !select;
+            template = 'app-GraphicDesigner';
+          "
+        >
+          <img src="../assets/images/GraphicDesigner.png" alt="" class="" />
         </div>
       </div>
     </div>

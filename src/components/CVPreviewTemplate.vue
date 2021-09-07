@@ -5,13 +5,15 @@
 </template>
 
 <script>
+import FrontendTemplate from "../components/FrontendTemplate.vue";
+import GraphicDesigner from "../components/GraphicDesigner.vue";
 
-import FrontendTemplate from "../components/FrontendTemplate.vue"
 export default {
-  props: ['template'],
-  components:{
-    appFrontendTemplate:FrontendTemplate,
-  }
+  props: ["template"],
+  components: {
+    appFrontendTemplate: FrontendTemplate,
+    appGraphicDesigner: GraphicDesigner,
+  },
 };
 </script>
 

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Template from '../views/Template.vue'
+import GraphicDesigner from '../components/GraphicDesigner.vue'
 import FrontendTemplate from '../components/FrontendTemplate.vue'
 
 const routes = [
@@ -15,6 +16,10 @@ const routes = [
     component: Template
   },
   {
+    path: '/GraphicDesigner',
+    name: 'GraphicDesigner',
+    component: GraphicDesigner
+  },{
     path: '/FrontendTemplate',
     name: 'FrontendTemplate',
     component: FrontendTemplate
