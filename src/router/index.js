@@ -19,7 +19,7 @@ const routes = [
     path: '/GraphicDesigner',
     name: 'GraphicDesigner',
     component: GraphicDesigner
-  },{
+  }, {
     path: '/FrontendTemplate',
     name: 'FrontendTemplate',
     component: FrontendTemplate

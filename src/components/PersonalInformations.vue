@@ -69,7 +69,8 @@
                   }"
                 />
                 <small v-if="v$.user.name.$error" class="form-text text-red-500"
-                  >Bu alan zorunludur</small>
+                  >Bu alan zorunludur</small
+                >
               </div>
               <div class="surname flex flex-col mt-3 w-full">
                 <label for="surname">Soy isim*</label>
@@ -85,7 +86,8 @@
                 <small
                   v-if="v$.user.surname.$error"
                   class="form-text text-red-500"
-                  >Bu alan zorunludur</small>
+                  >Bu alan zorunludur</small
+                >
               </div>
             </div>
           </div>
@@ -105,27 +107,23 @@
               <small
                 v-if="v$.user.email.required.$invalid == true"
                 class="form-text text-red-500"
-                >Bu alan zorunludur</small>
+                >Bu alan zorunludur</small
+              >
               <small
                 v-if="v$.user.email.$invalid"
                 class="form-text text-red-500"
-                >Geçerli bir email adresi giriniz</small>
+                >Geçerli bir email adresi giriniz</small
+              >
             </div>
             <div class="phone flex flex-col mt-3 w-full">
               <label for="phone">Telefon numarası</label>
               <input
                 type="text"
                 class="w-full h-12 px-3 border rounded"
-                v-model="v$.user.phoneNumber.$model"
-                :class="{
-                  'border-2 border-red-500 focus:ring-1 focus:ring-red-500':
-                    v$.user.phoneNumber.$error,
-                }"
+                v-model="user.phoneNumber"
+                @input="phoneMask"
+                placeholder="(555) 555-5555"
               />
-              <small
-                v-if="v$.user.phoneNumber.$error"
-                class="form-text text-red-500"
-                >Sadece rakam giriniz</small>
             </div>
           </div>
           <div class="form-group flex my-5 w-full">
@@ -153,7 +151,8 @@
               <small
                 v-if="v$.user.postCode.$error"
                 class="form-text text-red-500"
-                >Sadece rakam giriniz</small>
+                >Sadece rakam giriniz</small
+              >
             </div>
             <div class="city w-full">
               <label for="city">Şehir</label>
@@ -409,6 +408,15 @@ export default {
       //   console.log(error);
       // });
     },
+    phoneMask() {
+      var x;
+      x = this.user.phoneNumber
+        .replace(/\D/g, "")
+        .match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+      this.user.phoneNumber = !x[2]
+        ? x[1]
+        : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
+    },
   },
   validations() {
     return {
@@ -416,7 +424,6 @@ export default {
         name: { required },
         surname: { required },
         email: { required, email },
-        phoneNumber: { numeric },
         postCode: { numeric },
       },
     };

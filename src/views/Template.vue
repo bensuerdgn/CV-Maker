@@ -1,23 +1,21 @@
 <template>
-  <div class="bg-gray-50 pb-44">
+  <div class="bg-gray-50 pb-10">
     <div class="">
       <Header class="header" />
       <div class="images mx-20 -mt-10 relative z-10 flex justify-center">
         <div
-          class="image w-60 mx-5 shadow-box"
+          class="image w-96 mx-5 shadow-box"
           @click="
             isSelected = '#frontend';
-            select = !select;
             template = 'app-FrontendTemplate';
           "
         >
           <img src="../assets/images/FrontendTemplate.png" alt="" class="" />
         </div>
         <div
-          class="image w-60 mx-5 shadow-box"
+          class="image w-96 mx-5 shadow-box"
           @click="
             isSelected = '#graphic';
-            select = !select;
             template = 'app-GraphicDesigner';
           "
         >
@@ -37,7 +35,7 @@
             px-10
             text-center
             bg-black
-            opacity-40
+            opacity-70
           "
         >
           <button
@@ -75,7 +73,6 @@ export default {
   data() {
     return {
       select: false,
-      select2: false,
       isSelected: "",
       template: "",
     };
@@ -110,9 +107,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.header {
-  clip-path: ellipse(100% 100% at 50% 0%);
-}
+// .header {
+//   clip-path: ellipse(100% 100% at 50% 0%);
+// }
 .previewTemplate {
   position: fixed;
   top: 20%;
