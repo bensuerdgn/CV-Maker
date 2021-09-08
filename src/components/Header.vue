@@ -46,6 +46,7 @@
               bg-gray-400
               text-center
             "
+            :class="[pathClass ? 'bg-yellow-400' : 'bg-gray-400']"
             tag="button"
             exact
           >
@@ -53,7 +54,13 @@
             <span>Kişisel</span>
           </router-link>
 
-          <hr class="w-36 mt-7 mx-5" />
+          <!-- <hr class="w-36 mt-7 mx-5" /> -->
+          <div class="w-36 mx-5 mt-7 h-3 bg-gray-500 rounded-full flex items-center justify-center">
+            <div
+              class="bg-gray-400 h-1 w-32 rounded-full"
+              :class="[pathClass ? 'bg-yellow-400' : 'bg-gray-400']"
+            ></div>
+          </div>
           <router-link
             active-class="bg-yellow-400"
             to="/Template"
@@ -68,6 +75,7 @@
               text-center
             "
             exact
+            @click.prevent.capture="clicked"
           >
             <i class="fas fa-pen mb-6 pt-3"></i>
             <span>Şablon</span>
@@ -82,8 +90,15 @@
 export default {
   data() {
     return {
-      disabledLink: false,
+      pathClass: false,
     };
+  },
+  created() {
+    console.log(window.location.pathname);
+    var path = window.location.pathname;
+    if (path == "/template") {
+      this.pathClass = true;
+    }
   },
 };
 </script>
