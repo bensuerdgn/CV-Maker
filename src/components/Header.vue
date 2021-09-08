@@ -55,9 +55,21 @@
           </router-link>
 
           <!-- <hr class="w-36 mt-7 mx-5" /> -->
-          <div class="w-36 mx-5 mt-7 h-3 bg-gray-500 rounded-full flex items-center justify-center">
+          <div
+            class="
+              w-40
+              mx-5
+              mt-7
+              h-3
+              bg-gray-500
+              rounded-full
+              flex
+              items-center
+              justify-center
+            "
+          >
             <div
-              class="bg-gray-400 h-1 w-32 rounded-full"
+              class="bg-gray-400 h-1 w-36 rounded-full"
               :class="[pathClass ? 'bg-yellow-400' : 'bg-gray-400']"
             ></div>
           </div>
