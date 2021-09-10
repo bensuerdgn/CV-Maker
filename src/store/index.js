@@ -18,26 +18,7 @@ export default createStore({
   },
   actions: {
     setUserInfo({ commit, dispatch, state }, user) {
-      axios.post("/users.json",
-        {
-          photo: user.photo,
-          name: user.name,
-          surname: user.surname,
-          email: user.email,
-          phoneNumber: user.phoneNumber,
-          address: user.address,
-          postCode: user.postCode,
-          city: user.city,
-          birthdate: user.birthdate,
-          birthPlace: user.birthPlace,
-          drivingLicense: user.drivingLicense,
-          gender: user.gender,
-          militaryState: user.militaryState,
-          maritalStatus: user.maritalStatus,
-          linkedin: user.linkedin,
-          website: user.website,
-
-        }).then(response => {
+      axios.post("/users.json",user).then(response => {
           console.log(response);
           commit("setId", response.data.name)
           dispatch("getUserInfo", state.id)
@@ -69,7 +50,12 @@ export default createStore({
   },
   getters: {
     getUserInfo(state) {
-      return state.user
+      if (Object.keys(state.user).length
+      ) {
+        return state.user
+      } else {
+        return false
+      }
     }
   }
 })

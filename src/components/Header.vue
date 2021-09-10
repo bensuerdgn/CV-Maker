@@ -59,7 +59,7 @@
             class="
               w-40
               mx-5
-              mt-7
+              mt-6
               h-3
               bg-gray-500
               rounded-full

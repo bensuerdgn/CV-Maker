@@ -3,7 +3,15 @@
     <form @submit.prevent="onSubmit">
       <div class="shadow-2xl bg-white p-10 mb-20">
         <div class="title text-lg font-bold text-gray-700">
-          <h2 class="pb-5">Kişisel bilgiler</h2>
+          <div class="flex justify-between items-center pb-5">
+            <h2 class="">Kişisel bilgiler</h2>
+            <button
+              @click.prevent="clearAll"
+              class="bg-yellow-400 opacity-100 p-2 rounded text-sm"
+            >
+              Bilgileri Temizle
+            </button>
+          </div>
           <hr />
         </div>
         <div class="form w-full">
@@ -110,7 +118,7 @@
                 >Bu alan zorunludur</small
               >
               <small
-                v-if="v$.user.email.$invalid"
+                v-if="v$.user.email.$invalid && v$.user.email.$model != ''"
                 class="form-text text-red-500"
                 >Geçerli bir email adresi giriniz</small
               >
@@ -294,6 +302,94 @@
               />
             </div>
           </div>
+          <div class="form-group flex flex-col my-5 w-full">
+            <h1 class="text-xl mb-1">İş Deneyimi</h1>
+            <div class="border rounded p-5 my-5" v-if="workExperience">
+              <div class="">
+                <label for="companyName">Şirket Adı</label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  class="w-full h-12 px-3 border rounded mb-5"
+                />
+                <label for="position">Pozisyon</label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  class="w-full h-12 px-3 border rounded mb-5"
+                />
+                <label for="startDate">Başlangıç Tarihi</label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  class="w-full h-12 px-3 border rounded mb-5"
+                />
+                <label for="endDate">Bitiş Tarihi</label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  class="w-full h-12 px-3 border rounded"
+                />
+              </div>
+            </div>
+            <div class="border rounded p-5">
+              <div class="">
+                <label for="companyName">Şirket Adı</label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  class="w-full h-12 px-3 border rounded mb-5"
+                  v-model="workExperience.companyName"
+                />
+                <label for="position">Pozisyon</label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  class="w-full h-12 px-3 border rounded mb-5"
+                  v-model="workExperience.position"
+                />
+                <label for="startDate">Başlangıç Tarihi</label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  class="w-full h-12 px-3 border rounded mb-5"
+                  v-model="workExperience.startDate"
+                />
+                <label for="endDate">Bitiş Tarihi</label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  class="w-full h-12 px-3 border rounded"
+                  v-model="workExperience.endDate"
+                />
+              </div>
+            </div>
+            <div class="flex flex-row-reverse mt-5">
+              <button
+                @click.prevent="addExperience"
+                class="
+                  flex
+                  justify-end
+                  bg-yellow-400
+                  opacity-100
+                  py-2
+                  px-5
+                  rounded
+                  text-sm
+                "
+              >
+                Ekle
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -338,6 +434,7 @@ export default {
         maritalStatus: "",
         linkedin: "",
         website: "",
+        workExperience: [],
       },
       date: {
         day: "",
@@ -358,8 +455,46 @@ export default {
         { value: "11", month: "Kasım" },
         { value: "12", month: "Aralık" },
       ],
-      days: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+      days: [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+      ],
       years: ["2021", "2020", "2019", "2018", "2017", "2016", "2015"],
+      workExperience: {
+        companyName: "",
+        position: "",
+        startDate: "",
+        endDate: "",
+      },
     };
   },
   methods: {
@@ -383,30 +518,6 @@ export default {
     },
     onSubmit() {
       this.$store.dispatch("setUserInfo", { ...this.user });
-      // axios
-      //   .post("/users.json", {
-      //     name: this.user.name,
-      //     surname: this.user.surname,
-      //     email: this.user.email,
-      //     phoneNumber: this.user.phoneNumber,
-      //     address: this.user.address,
-      //     postCode: this.user.postCode,
-      //     city: this.user.city,
-      //     birthdate: this.user.birthdate,
-      //     birthPlace: this.user.birthPlace,
-      //     drivingLicense: this.user.drivingLicense,
-      //     gender: this.user.gender,
-      //     militaryState: this.user.militaryState,
-      //     maritalStatus: this.user.maritalStatus,
-      //     linkedin: this.user.linkedin,
-      //     website: this.user.website,
-      //   })
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //   console.log(error);
-      // });
     },
     phoneMask() {
       var x;
@@ -417,6 +528,26 @@ export default {
         ? x[1]
         : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
     },
+    clearAll() {
+      this.user = {};
+    },
+    addExperience() {
+      const data = {
+        companyName: this.workExperience.companyName,
+        position: this.workExperience.position,
+        startDate: this.workExperience.startDate,
+        endDate: this.workExperience.endDate,
+      };
+      this.user.workExperience.push(data);
+       
+    },
+  },
+  created() {
+    var data = this.$store.getters.getUserInfo;
+    if (data) {
+      this.user = data;
+    }
+    console.log(data);
   },
   validations() {
     return {
