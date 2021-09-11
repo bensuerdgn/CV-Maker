@@ -304,38 +304,63 @@
           </div>
           <div class="form-group flex flex-col my-5 w-full">
             <h1 class="text-xl mb-1">İş Deneyimi</h1>
-            <div class="border rounded p-5 my-5" v-if="workExperience">
-              <div class="">
-                <label for="companyName">Şirket Adı</label>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  class="w-full h-12 px-3 border rounded mb-5"
-                />
-                <label for="position">Pozisyon</label>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  class="w-full h-12 px-3 border rounded mb-5"
-                />
-                <label for="startDate">Başlangıç Tarihi</label>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  class="w-full h-12 px-3 border rounded mb-5"
-                />
-                <label for="endDate">Bitiş Tarihi</label>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  class="w-full h-12 px-3 border rounded"
-                />
+            <!-- <div class="" v-if="user.workExperience">
+              <div
+                class="border rounded p-5 mb-5"
+                v-for="(work, index) in workExperience"
+                :key="index"
+              >
+                <div class="">
+                  <label for="companyName">Şirket Adı</label>
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    class="w-full h-12 px-3 border rounded mb-5"
+                    v-model="work.companyName"
+                  />
+                  <label for="position">Pozisyon</label>
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    class="w-full h-12 px-3 border rounded mb-5"
+                    v-model="work.position"
+                  /><label for="statement">Açıklama</label>
+                  <textarea
+                    name=""
+                    id=""
+                    v-model="work.statement"
+                    class="w-full h-20 px-3 border rounded mb-5"
+                  >
+                  </textarea>
+
+                  <div class="date flex flex-row">
+                    <div class="mr-5">
+                      <label for="startDate">Başlangıç Tarihi</label>
+                      <input
+                        type="text"
+                        name=""
+                        id=""
+                        class="w-full h-12 px-3 border rounded mb-5"
+                        v-model="work.startDate"
+                      />
+                    </div>
+                    <div class="">
+                      <label for="endDate">Bitiş Tarihi</label>
+                      <input
+                        type="text"
+                        name=""
+                        id=""
+                        class="w-full h-12 px-3 border rounded"
+                        v-model="work.endDate"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            </div> -->
+
             <div class="border rounded p-5">
               <div class="">
                 <label for="companyName">Şirket Adı</label>
@@ -353,23 +378,37 @@
                   id=""
                   class="w-full h-12 px-3 border rounded mb-5"
                   v-model="workExperience.position"
-                />
-                <label for="startDate">Başlangıç Tarihi</label>
-                <input
-                  type="text"
+                /><label for="statement">Açıklama</label>
+                <textarea
                   name=""
                   id=""
-                  class="w-full h-12 px-3 border rounded mb-5"
-                  v-model="workExperience.startDate"
-                />
-                <label for="endDate">Bitiş Tarihi</label>
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  class="w-full h-12 px-3 border rounded"
-                  v-model="workExperience.endDate"
-                />
+                  v-model="workExperience.statement"
+                  class="w-full h-20 px-3 border rounded mb-5"
+                >
+                </textarea>
+
+                <div class="date flex flex-row">
+                  <div class="mr-5">
+                    <label for="startDate">Başlangıç Tarihi</label>
+                    <input
+                      type="text"
+                      name=""
+                      id=""
+                      class="w-full h-12 px-3 border rounded mb-5"
+                      v-model="workExperience.startDate"
+                    />
+                  </div>
+                  <div class="">
+                    <label for="endDate">Bitiş Tarihi</label>
+                    <input
+                      type="text"
+                      name=""
+                      id=""
+                      class="w-full h-12 px-3 border rounded"
+                      v-model="workExperience.endDate"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <div class="flex flex-row-reverse mt-5">
@@ -494,6 +533,7 @@ export default {
         position: "",
         startDate: "",
         endDate: "",
+        statement: "",
       },
     };
   },
@@ -537,9 +577,10 @@ export default {
         position: this.workExperience.position,
         startDate: this.workExperience.startDate,
         endDate: this.workExperience.endDate,
+        statement: this.workExperience.statement,
       };
       this.user.workExperience.push(data);
-       
+      this.workExperience = {};
     },
   },
   created() {

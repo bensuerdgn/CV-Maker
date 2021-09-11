@@ -114,42 +114,21 @@
           </div>
         </div>
       </div>
-      <div class="workExperience my-10 p-10 mb-0  shadow-box">
-        <div class="">
+      <div
+        class="workExperience my-10 p-10 mb-0 shadow-box"
+        v-if="user.workExperience"
+      >
+        <div class="" v-for="(work, index) in user.workExperience" :key="index">
           <div class="experience pl-8">
             <h2 class="text-xl font-bold">
-              Frontend Developer
-              <span class="text-lg text-gray-500"> at Creative Agency</span>
+              {{ work.companyName }}
+              <span class="text-lg text-gray-500"> {{ work.position }}</span>
             </h2>
-            <div class="date my-3">May, 2015 - Present</div>
+            <div class="date my-3">
+              {{ work.startDate }} - {{ work.endDate }}
+            </div>
             <p>
-              Leverage agile frameworks to provide a robust synopsis for high
-              level overviews. Iterative approaches to corporate strategy foster
-              collaborative thinking to further the overall value proposition.
-            </p>
-          </div>
-          <div class="experience pl-8">
-            <h2 class="text-xl font-bold">
-              Graphic Designer
-              <span class="text-lg text-gray-500"> at Design Studio</span>
-            </h2>
-            <div class="date my-3">June, 2013 - May, 2015</div>
-            <p>
-              Override the digital divide with additional clickthroughs from
-              DevOps. Nanotechnology immersion along the information highway
-              will close the loop on focusing solely on the bottom line.
-            </p>
-          </div>
-          <div class="experience pl-8">
-            <h2 class="text-xl font-bold">
-              Junior Web Developer
-              <span class="text-lg text-gray-500"> at Indie Studio</span>
-            </h2>
-            <div class="date my-3">Jan, 2011 - May, 2013</div>
-            <p>
-              User generated content in real-time will have multiple touchpoints
-              for offshoring. Organically grow the holistic world view of
-              disruptive innovation via workplace diversity and empowerment.
+              {{ work.statement }}
             </p>
           </div>
         </div>
