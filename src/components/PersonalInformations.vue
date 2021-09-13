@@ -7,7 +7,7 @@
             <h2 class="">Kişisel bilgiler</h2>
             <button
               @click.prevent="clearAll"
-              class="bg-yellow-400 opacity-100 p-2 rounded text-sm"
+              class="bg-yellow-400 opacity-100 p-2 rounded text-sm text-white"
             >
               Bilgileri Temizle
             </button>
@@ -304,65 +304,45 @@
           </div>
           <div class="form-group flex flex-col my-5 w-full">
             <h1 class="text-xl mb-1">İş Deneyimi</h1>
-            <!-- <div class="" v-if="user.workExperience">
-              <div
-                class="border rounded p-5 mb-5"
-                v-for="(work, index) in workExperience"
-                :key="index"
-              >
-                <div class="">
-                  <label for="companyName">Şirket Adı</label>
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    class="w-full h-12 px-3 border rounded mb-5"
-                    v-model="work.companyName"
-                  />
-                  <label for="position">Pozisyon</label>
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    class="w-full h-12 px-3 border rounded mb-5"
-                    v-model="work.position"
-                  /><label for="statement">Açıklama</label>
-                  <textarea
-                    name=""
-                    id=""
-                    v-model="work.statement"
-                    class="w-full h-20 px-3 border rounded mb-5"
-                  >
-                  </textarea>
+            <div class="workExperience" v-if="user.workExperience">
+              <div class="mb-5 border p-5 rounded">
+                <div
+                  class=""
+                  v-for="(work, index) in user.workExperience"
+                  :key="index"
+                >
+                  <div class="experience pl-8">
+                    <div class="flex justify-between">
+                      <h2 class="flex items-center text-xl font-bold">
+                        <i class="far fa-circle text-yellow-400 -ml-8 mr-3"></i>
+                        {{ work.companyName }}
+                        <span class="text-lg text-gray-500">
+                          {{ work.position }}</span
+                        >
+                      </h2>
+                      <div
+                        class="text-red-500 text-2xl rounded-full"
+                        @click.prevent="
+                          deleteExperience(index, work.companyName)
+                        "
+                      >
+                        <i class="fas fa-times"></i>
+                      </div>
+                    </div>
 
-                  <div class="date flex flex-row">
-                    <div class="mr-5">
-                      <label for="startDate">Başlangıç Tarihi</label>
-                      <input
-                        type="text"
-                        name=""
-                        id=""
-                        class="w-full h-12 px-3 border rounded mb-5"
-                        v-model="work.startDate"
-                      />
+                    <div class="date my-1">
+                      {{ work.startDate }} - {{ work.endDate }}
                     </div>
-                    <div class="">
-                      <label for="endDate">Bitiş Tarihi</label>
-                      <input
-                        type="text"
-                        name=""
-                        id=""
-                        class="w-full h-12 px-3 border rounded"
-                        v-model="work.endDate"
-                      />
-                    </div>
+                    <p>
+                      {{ work.statement }}
+                    </p>
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
 
-            <div class="border rounded p-5">
-              <div class="">
+            <div class="border rounded p-5 w-full">
+              <div class="w-full">
                 <label for="companyName">Şirket Adı</label>
                 <input
                   type="text"
@@ -387,8 +367,8 @@
                 >
                 </textarea>
 
-                <div class="date flex flex-row">
-                  <div class="mr-5">
+                <div class="date flex w-full">
+                  <div class="w-full mr-5">
                     <label for="startDate">Başlangıç Tarihi</label>
                     <input
                       type="text"
@@ -398,7 +378,7 @@
                       v-model="workExperience.startDate"
                     />
                   </div>
-                  <div class="">
+                  <div class="w-full">
                     <label for="endDate">Bitiş Tarihi</label>
                     <input
                       type="text"
@@ -411,7 +391,7 @@
                 </div>
               </div>
             </div>
-            <div class="flex flex-row-reverse mt-5">
+            <div class="button flex flex-row-reverse mt-5">
               <button
                 @click.prevent="addExperience"
                 class="
@@ -422,7 +402,7 @@
                   py-2
                   px-5
                   rounded
-                  text-sm
+                  text-sm text-white
                 "
               >
                 Ekle
@@ -582,6 +562,13 @@ export default {
       this.user.workExperience.push(data);
       this.workExperience = {};
     },
+    deleteExperience(index, companyName) {
+      this.user.workExperience.forEach((element) => {
+        if (element.companyName == companyName) {
+          this.user.workExperience.splice(index, 1);
+        }
+      });
+    },
   },
   created() {
     var data = this.$store.getters.getUserInfo;
@@ -610,4 +597,5 @@ input:focus {
 .form-group .items {
   width: calc(100% - 156px);
 }
+
 </style>
