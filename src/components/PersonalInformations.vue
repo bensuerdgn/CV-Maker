@@ -304,42 +304,6 @@
           </div>
           <div class="form-group flex flex-col my-5 w-full">
             <h1 class="text-xl mb-1">İş Deneyimi</h1>
-            <div class="workExperience" v-if="user.workExperience">
-              <div class="mb-5 border p-5 rounded">
-                <div
-                  class=""
-                  v-for="(work, index) in user.workExperience"
-                  :key="index"
-                >
-                  <div class="experience pl-8">
-                    <div class="flex justify-between">
-                      <h2 class="flex items-center text-xl font-bold">
-                        <i class="far fa-circle text-yellow-400 -ml-8 mr-3"></i>
-                        {{ work.companyName }}
-                        <span class="text-lg text-gray-500">
-                          {{ work.position }}</span
-                        >
-                      </h2>
-                      <div
-                        class="text-red-500 text-2xl rounded-full"
-                        @click.prevent="
-                          deleteExperience(index, work.companyName)
-                        "
-                      >
-                        <i class="fas fa-times"></i>
-                      </div>
-                    </div>
-
-                    <div class="date my-1">
-                      {{ work.startDate }} - {{ work.endDate }}
-                    </div>
-                    <p>
-                      {{ work.statement }}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class="border rounded p-5 w-full">
               <div class="w-full">
@@ -390,23 +354,69 @@
                   </div>
                 </div>
               </div>
+              <div class="button flex flex-row-reverse mt-5">
+                <button
+                  @click.prevent="addExperience"
+                  class="
+                    flex
+                    justify-end
+                    bg-yellow-400
+                    opacity-100
+                    py-2
+                    px-5
+                    rounded
+                    text-sm text-white
+                  "
+                >
+                  Ekle
+                </button>
+              </div>
             </div>
-            <div class="button flex flex-row-reverse mt-5">
-              <button
-                @click.prevent="addExperience"
-                class="
-                  flex
-                  justify-end
-                  bg-yellow-400
-                  opacity-100
-                  py-2
-                  px-5
-                  rounded
-                  text-sm text-white
-                "
+
+            <div
+              class="work-experience mt-5 border p-5 rounded"
+              v-if="user.workExperience.length"
+            >
+              <h1 class="text-2xl mb-2">Eklenen İş Deneyimleri</h1>
+              <div
+                class="experience pl-8 my-1 border-b py-3"
+                v-for="(work, index) in user.workExperience"
+                :key="index"
               >
-                Ekle
-              </button>
+                <div class="flex justify-between">
+                  <h2 class="flex items-center text-xl font-bold">
+                    <i class="far fa-circle text-yellow-400 -ml-8 mr-3"></i>
+                    {{ work.companyName }} &nbsp;
+                    <span class="text-lg text-gray-500">
+                      {{ work.position }}</span
+                    >
+                  </h2>
+                  <div
+                    class="
+                      text-red-500
+                      border border-red-500
+                      text-lg
+                      rounded
+                      px-2
+                      hover:bg-red-500
+                      hover:text-white
+                    "
+                  >
+                    <button
+                      @click.prevent="deleteExperience(index, work.companyName)"
+                    >
+                      Sil <i class="far fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="date my-1">
+                  {{ work.startDate }} - {{ work.endDate }}
+                </div>
+                <p>
+                  {{ work.statement }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -561,6 +571,10 @@ export default {
       };
       this.user.workExperience.push(data);
       this.workExperience = {};
+      var scroll = this.user.workExperience.length;
+      scroll = scroll * 400 + 1400;
+
+      window.scrollTo(0, scroll);
     },
     deleteExperience(index, companyName) {
       this.user.workExperience.forEach((element) => {
@@ -597,5 +611,7 @@ input:focus {
 .form-group .items {
   width: calc(100% - 156px);
 }
-
+.experience:last-child{
+  border:none;
+}
 </style>
